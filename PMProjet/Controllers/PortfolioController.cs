@@ -8,7 +8,7 @@ using PMProjet.Models;
 
 namespace PMProjet.Controllers
 {
-    public class HomeController : Controller
+    public class PortfolioController : Controller
     {
         public IActionResult Index()
         {
