@@ -10,6 +10,13 @@ namespace PMProjet.Controllers
 {
     public class HomeController : Controller
     {
+        private IDal dal;
+
+        public HomeController(MyDbContext context)
+        {
+            dal = new Dal(context);
+        }
+
         public IActionResult Index()
         {
             return View();

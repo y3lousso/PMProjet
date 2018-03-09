@@ -2,6 +2,7 @@
     ViewData["Title"] = "Portfolio Page";
 }
 @model List<PMProjet.Models.Project>
+
 <!-- Page Content -->
 <div class="container">
     <!-- Page Header -->
@@ -14,38 +15,20 @@
         </div>
     </div>
 
-    <div class="row">
-        @{
-            int projectIndex = 0;
-        }
-
-        @foreach (var project in Model)
-        {
+    @foreach (var project in Model)
+    {
+        <div class="row">
             <div class="col-md-4 portfolio-item">
                 <a href="#">
-                    @{
-                        var imagePath = Url.Content("~/images/"+project.Thumbnail);// + project.Thumbnail;
-                    }
-                    <img class="img-responsive" src="@imagePath" alt="@imagePath">
+                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
                 <h3>
                     <a href="#"><b>@project.Name</b> @project.Date </a>
                 </h3>
                 <p>@project.Description</p>
             </div>
-
-            if (projectIndex % 3 == 2) // start new line for project
-            {
-                @:</div>
-                @:<div class="row">
-                @:<hr>
-            }
-        projectIndex++;
-        }
         </div>
-
-
-    <hr>
+    }
     <footer>
         <p>&copy; 2018 - Copyright UQAC</p>
     </footer>
