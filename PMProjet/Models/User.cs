@@ -8,10 +8,10 @@ namespace PMProjet.Models
 {
     public class User
     {
-        public string Id { get; set; }
-        [Required, MaxLength(80)]
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Please Provide Username", AllowEmptyStrings = false), MaxLength(80)]
         public string Pseudo { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please Provide Password", AllowEmptyStrings = false)]
         public string Password { get; set; }
 
         public string FirstName { get; set; } = "FirstName";

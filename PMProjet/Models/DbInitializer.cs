@@ -45,7 +45,7 @@ namespace PMProjet.Models
                 context.SaveChanges();
 
 
-                context.Users.Add(new User { Pseudo = "y3lousso", Password = "password", FirstName = "Yannick", LastName = "Loussouarn", JobTitle = "Student" });
+                context.Users.Add(new User {Id = 1, Pseudo = "y3lousso", Password = "password", FirstName = "Yannick", LastName = "Loussouarn", JobTitle = "Student" });
                 context.SaveChanges();
             }
         }
