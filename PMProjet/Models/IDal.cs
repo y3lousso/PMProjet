@@ -8,7 +8,11 @@ namespace PMProjet.Models
     public interface IDal : IDisposable
     {
         //Info & Login
-        User GetUser();
+        int AddUser(string username, string password);
+        int AddUser(string username, string password, string firstname, string lastname, string jobTitle);
+        User GetUser(int id);
+        User GetUser(string id);
+        User CheckUser(string username, string password);
 
         //Project
         List<Project> GetAllProjects();
