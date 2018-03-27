@@ -149,14 +149,14 @@
     <div class="modal-dialog">
         <div class="loginmodal-container">
             <h1>Login to Your Account</h1><br>
-            <form>
-                <input type="text" name="user" placeholder="Username">
-                <input type="password" name="pass" placeholder="Password">
+            <form asp-area="" asp-controller="Home" asp-action="Login">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
                 <input type="submit" name="login" class="login loginmodal-submit" value="Login">
             </form>
 
             <div class="login-help">
-                <a href="#">Register</a> - <a href="#">Forgot Password</a>
+                <a asp-controller="Home" asp-action="Register">Register</a> - <a asp-controller="Home" asp-action="ForgotPassWord">Forgot Password</a>
             </div>
         </div>
     </div>
