@@ -17,21 +17,17 @@ namespace PMProjet.Controllers
             dal = new Dal(context);
         }
 
-        public IActionResult Index()
+        public IActionResult Connexion(string username, string password)
         {
-            return View();
-        }
-
-
-        public void Connexion(string username, string password)
-        {
-            if (dal.CheckUser(username, password) != null)
+            if (dal.CheckUser(username, password))
             {
                 Trace.WriteLine("Login correct !");
+                return View("Index");
             }
             else
             {
                 Trace.WriteLine("Login uncorrect !!!");
+                return View("InvalidePassword");
             }
         }
 
