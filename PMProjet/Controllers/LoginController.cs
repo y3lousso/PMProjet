@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PMProjet.Models;
+using System.Web;
 
 namespace PMProjet.Controllers
 {
@@ -15,11 +12,38 @@ namespace PMProjet.Controllers
         public LoginController(MyDbContext context)
         {
             dal = new Dal(context);
+
+          
         }
 
         public IActionResult Index()
         {
-            return View();
+            UserViewModel viewModel = new UserViewModel() { Authentification = HttpContext.User.Identity.IsAuthenticated };
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                viewModel.User = dal.GetUser(HttpContext.User.Identity.Name);
+            }
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Index(UserViewModel viewModel, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = dal.CheckUser(viewModel.User.Pseudo, viewModel.User.Password);
+                if (User != null)
+                {
+                   //FormsAuthentification.SetAuthCookie(user.Id.ToString(), false);
+                    if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        return Redirect(returnUrl);
+                    return Redirect("/");
+                }
+
+                ModelState.AddModelError("Utilisateur.Prenom", "Prénom et/ou mot de passe incorrect(s)");
+            }
+
+            return View(viewModel);
         }
 
 
@@ -37,17 +61,17 @@ namespace PMProjet.Controllers
 
         public IActionResult Register()
         {
-            throw new NotImplementedException();
+            return Redirect("/");
         }
 
         public IActionResult ForgotPassWord()
         {
-            throw new NotImplementedException();
+            return Redirect("/");
         }
 
         public IActionResult Deconnexion()
         {
-            throw new NotImplementedException();
+            return Redirect("/");
         }
     }
 }
