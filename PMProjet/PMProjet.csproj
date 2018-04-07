@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\PMProjet20180308083426 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\PortfolioTemplate - Web Deploy.pubxml" />
     <None Remove="Views\Portfolio\Index.html" />
   </ItemGroup>
 
@@ -17,6 +19,10 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>

@@ -21,9 +21,9 @@
             <div class="col-md-7">
                 <a href="#">
                     @{
-                     string imagePath = "~/ images /" + education.Thumbnail;
+                    var imagePath = Url.Content("~/images/" + education.Thumbnail);
                     }
-                    <img class="img-responsive" src="~/images/uqac.png" alt="imagePath">
+                    <img class="img-responsive" src="@imagePath" alt="@imagePath">
                 </a>
             </div>
             <div class="col-md-5">

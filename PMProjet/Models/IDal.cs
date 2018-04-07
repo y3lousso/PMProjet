@@ -12,15 +12,15 @@ namespace PMProjet.Models
         int AddUser(string username, string password, string firstname, string lastname, string jobTitle);
         User GetUser(int id);
         User GetUser(string id);
-        User CheckUser(string username, string password);
+        bool CheckUser(string username, string password);
 
         //Project
         List<Project> GetAllProjects();
-        void AddProject(string name, string date, string description);
+        void AddProject(string name, string date, string description, string thumbnail);
 
         //Education
         List<Education> GetAllEducations();
-        void AddEducation();
+        void AddEducation(string name, string date, string description, string thumbnail);
 
     }
 }

@@ -48,9 +48,16 @@ namespace PMProjet.Models
             return int.TryParse(idString, out var id) ? GetUser(id) : null;
         }
 
-        public User CheckUser(string username, string password)
+        public bool CheckUser(string username, string password)
         {
-            return db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password);
+            if(db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password) != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }         
         }
 
         //Project
@@ -59,9 +66,9 @@ namespace PMProjet.Models
             return db.Projects.ToList();
         }
 
-        public void AddProject(string name, string date, string description)
+        public void AddProject(string name, string date, string description, string thumbnail)
         {
-            db.Projects.Add(new Project { Name = name, Date = date, Description = description });
+            db.Projects.Add(new Project { Name = name, Date = date, Description = description, Thumbnail = thumbnail });
             db.SaveChanges();
         }
 
@@ -71,9 +78,10 @@ namespace PMProjet.Models
             return db.Educations.ToList();
         }
 
-        public void AddEducation()
+        public void AddEducation(string name, string date, string description, string thumbnail)
         {
-
+            db.Educations.Add(new Education { Name = name, Date = date, Description = description, Thumbnail = thumbnail });
+            db.SaveChanges();
         }
 
         public void Dispose()

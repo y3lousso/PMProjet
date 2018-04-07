@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PMProjet.Models;
-using System.Web;
 
 namespace PMProjet.Controllers
 {
@@ -12,66 +15,35 @@ namespace PMProjet.Controllers
         public LoginController(MyDbContext context)
         {
             dal = new Dal(context);
-
-          
         }
 
-        public IActionResult Index()
+        public IActionResult Connexion(string username, string password)
         {
-            UserViewModel viewModel = new UserViewModel() { Authentification = HttpContext.User.Identity.IsAuthenticated };
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                viewModel.User = dal.GetUser(HttpContext.User.Identity.Name);
-            }
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public IActionResult Index(UserViewModel viewModel, string returnUrl)
-        {
-            if (ModelState.IsValid)
-            {
-                User user = dal.CheckUser(viewModel.User.Pseudo, viewModel.User.Password);
-                if (User != null)
-                {
-                   //FormsAuthentification.SetAuthCookie(user.Id.ToString(), false);
-                    if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
-                        return Redirect(returnUrl);
-                    return Redirect("/");
-                }
-
-                ModelState.AddModelError("Utilisateur.Prenom", "Prénom et/ou mot de passe incorrect(s)");
-            }
-
-            return View(viewModel);
-        }
-
-
-        public void Connexion(string username, string password)
-        {
-            if (dal.CheckUser(username, password) != null)
+            if (dal.CheckUser(username, password))
             {
                 Trace.WriteLine("Login correct !");
+                return View("Index");
             }
             else
             {
                 Trace.WriteLine("Login uncorrect !!!");
+                return View("InvalidePassword");
             }
         }
 
         public IActionResult Register()
         {
-            return Redirect("/");
+            throw new NotImplementedException();
         }
 
         public IActionResult ForgotPassWord()
         {
-            return Redirect("/");
+            throw new NotImplementedException();
         }
 
         public IActionResult Deconnexion()
         {
-            return Redirect("/");
+            throw new NotImplementedException();
         }
     }
 }
