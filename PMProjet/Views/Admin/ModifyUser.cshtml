@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Admin";
+}
+
+@model PMProjet.Models.User
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Admin
+                <small>Configure your content</small>
+            </h1>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Modifier l'utilisateur</legend>
+
+            <div>
+                @Html.LabelFor(model => model.Pseudo)
+                @Html.TextBoxFor(model => model.Pseudo)
+                @Html.ValidationMessageFor(model => model.Pseudo)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Password)
+                @Html.TextBoxFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.FirstName)
+                @Html.TextBoxFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.LastName)
+                @Html.TextBoxFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.JobTitle)
+                @Html.TextBoxFor(model => model.JobTitle)
+                @Html.ValidationMessageFor(model => model.JobTitle)
+            </div>
+
+            <br />
+            <input type="submit" value="Ajouter" />
+        </fieldset>
+    }
+
+    <footer>
+        <p>&copy; 2018 - Copyright UQAC</p>
+    </footer>
+</div>

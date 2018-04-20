@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PMProjet.Models;
+using PMProjet.ViewModels;
 
 namespace PMProjet.Controllers
 {
@@ -21,13 +21,11 @@ namespace PMProjet.Controllers
         {
             if (dal.CheckUser(username, password))
             {
-                Trace.WriteLine("Login correct !");
-                return View("Index");
+                return RedirectToAction("Index","AdminController");
             }
             else
             {
-                Trace.WriteLine("Login uncorrect !!!");
-                return View("InvalidePassword");
+                return RedirectToAction("InvalidPassword");
             }
         }
 
@@ -44,6 +42,11 @@ namespace PMProjet.Controllers
         public IActionResult Deconnexion()
         {
             throw new NotImplementedException();
+        }
+
+        public IActionResult InvalidPassword()
+        {
+            return View("InvalidPassword");
         }
     }
 }

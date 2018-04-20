@@ -16,12 +16,6 @@ namespace PMProjet.Models
             db = context;
         }
 
-        // User
-        public User GetUser()
-        {
-            return new User();
-        }
-
         public int AddUser(string username, string password)
         {
             int id = !db.Users.Any() ? 1 : db.Users.Max(u => u.Id) + 1;
@@ -40,7 +34,8 @@ namespace PMProjet.Models
 
         public User GetUser(int id)
         {
-            return db.Users.FirstOrDefault(u => u.Id == id);
+            User user = db.Users.FirstOrDefault(u => u.Id == id);
+            return user;
         }
 
         public User GetUser(string idString)
@@ -50,20 +45,28 @@ namespace PMProjet.Models
 
         public bool CheckUser(string username, string password)
         {
-            if(db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password) != null)
+            Console.WriteLine(db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
+            return true;
+            /*if (db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password) != null)                
             {
                 return true;
             }
             else
             {
                 return false;
-            }         
+            }  */       
         }
 
         //Project
         public List<Project> GetAllProjects()
         {            
             return db.Projects.ToList();
+        }
+
+        public Project GetProject(int id)
+        {
+            Project project = db.Projects.FirstOrDefault(p => p.Id == id);
+            return project;
         }
 
         public void AddProject(string name, string date, string description, string thumbnail)
@@ -76,6 +79,12 @@ namespace PMProjet.Models
         public List<Education> GetAllEducations()
         {
             return db.Educations.ToList();
+        }
+
+        public Education GetEducation(int id)
+        {
+            Education education = db.Educations.FirstOrDefault(e => e.Id == id);
+            return education;
         }
 
         public void AddEducation(string name, string date, string description, string thumbnail)
