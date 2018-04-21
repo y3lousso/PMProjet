@@ -1,0 +1,27 @@
+﻿@{
+	ViewData["Title"] = "Login";
+}
+
+@model PMProjet.ViewModels.LoginFormViewModel
+
+<html>
+<body>
+	<div class="modal-dialog">
+		<div class="loginmodal-container">
+			<h1>Login to Your Account</h1><br>
+			<form asp-area="" asp-controller="Login" asp-action="Connexion">
+				<input type="text" name="username" placeholder="Username">
+				<input type="password" name="password" placeholder="Password">
+				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+			</form>
+			@if (Model.Message != null)
+			{
+			<font color="@Model.MessageColor">@Model.Message</font>
+			}
+			<div class="login-help">
+				<a asp-controller="Login" asp-action="ForgotPassWord">Forgot Password</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
