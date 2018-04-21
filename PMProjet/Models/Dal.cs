@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PMProjet.Models
 {
@@ -43,17 +40,22 @@ namespace PMProjet.Models
             return int.TryParse(idString, out var id) ? GetUser(id) : null;
         }
 
+        public User GetUser(string username, string password)
+        {
+            return db.Users.SingleOrDefault(u => u.Pseudo == username && u.Password == password);
+        }
+
         public bool CheckUser(string username, string password)
         {
             //Console.WriteLine(db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
             if (db.Users.SingleOrDefault(u => u.Pseudo == username && u.Password == password) != null)
             {
-                Console.WriteLine("success ! " + db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
+                Console.WriteLine("Login success ! " + db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
                 return true;
             }
             else
             {
-                Console.WriteLine("failed ! " + db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
+                Console.WriteLine("Login failed ! " + db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
                 return false;
             }  
         }
