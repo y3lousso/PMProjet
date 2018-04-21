@@ -24,7 +24,7 @@
             <div class="col-md-4 portfolio-item">
                 <a href="#">
                     @{
-                        var imagePath = Url.Content("~/images/"+project.Thumbnail);// + project.Thumbnail;
+                        var imagePath = Url.Content("~/images/" + project.Thumbnail);
                     }
                     <img class="img-responsive" src="@imagePath" alt="@imagePath">
                 </a>
@@ -40,9 +40,9 @@
                 @:<div class="row">
                 @:<hr>
             }
-        projectIndex++;
+            projectIndex++;
         }
-        </div>
+    </div>
 
 
     <hr>
@@ -50,6 +50,7 @@
 </div>
 <!-- /.container -->
 
-    <footer>
-        <p>&copy; 2018 - Copyright UQAC</p>
-    </footer>
+
+<footer>
+    <p>&copy; 2018 - Copyright UQAC</p>
+</footer>

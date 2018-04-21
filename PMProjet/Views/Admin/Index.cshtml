@@ -53,7 +53,7 @@
             <td>@Model.User.JobTitle</td>
             <td>@Model.User.Pseudo</td>
             <td>@Model.User.Password</td>
-            <td>@Html.ActionLink("Modify", "ModifyUser")</td>
+            <td>@Html.ActionLink("Modify", "ModifyUser", "Admin")</td>
         </tr>
     </table>
 
@@ -75,7 +75,7 @@
                 <td>@project.Date</td>
                 <td>@project.Description</td>
                 <td>@project.Thumbnail</td>
-                <td>@Html.ActionLink("Modify", "ModifyProject", project.Id)</td>
+                <td>@Html.ActionLink("Modify", "ModifyProject", "Admin", new{projectId = project.Id})</td>
             </tr>
         }
     </table>
@@ -98,12 +98,13 @@
                 <td>@education.Date</td>
                 <td>@education.Description</td>
                 <td>@education.Thumbnail</td>
-                <td>@Html.ActionLink("Modify", "ModifyProject", education.Id)</td>
+                <td>@Html.ActionLink("Modify", "ModifyEducation", "Admin", new { educationId = education.Id })</td>
             </tr>
         }
     </table>
 
     <hr />
+
 </div>
 
 <footer>
