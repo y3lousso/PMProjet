@@ -21,7 +21,7 @@ namespace PMProjet.Controllers
         {
             if (dal.CheckUser(username, password))
             {
-                return RedirectToAction("Index","AdminController");
+                return RedirectToAction("Index","Admin");
             }
             else
             {

@@ -2,7 +2,6 @@
     ViewData["Title"] = "Education Page";
 }
 @model List<PMProjet.Models.Education>
-
 <!-- Page Content -->
 <div class="container">
     <!-- Page Heading -->
@@ -21,7 +20,7 @@
             <div class="col-md-7">
                 <a href="#">
                     @{
-                    var imagePath = Url.Content("~/images/" + education.Thumbnail);
+                        var imagePath = Url.Content("~/images/" + education.Thumbnail);
                     }
                     <img class="img-responsive" src="@imagePath" alt="@imagePath">
                 </a>
@@ -35,8 +34,8 @@
         </div>
         <hr>
     }
-
-    <footer>
-        <p>&copy; 2018 - Copyright UQAC</p>
-    </footer>
 </div>
+
+<footer>
+    <p>&copy; 2018 - Copyright UQAC</p>
+</footer>
