@@ -1,0 +1,27 @@
+﻿@{
+	ViewData["Title"] = "Register";
+}
+
+<html>
+<body>
+	<br />
+	<div class="modal-dialog">
+		<div class="loginmodal-container">
+			<h1>Login to Your Account</h1><br>
+			<form asp-area="" asp-controller="Login" asp-action="Connexion">
+				
+				<input type="text" name="firstname" placeholder="Firstname">
+				<input type="text" name="lastname" placeholder="Lastname">
+				<input type="text" name="job" placeholder="Job"/> 
+				<input type="text" name="username" placeholder="Username">
+				<input type="password" name="password" placeholder="Password">
+				<input type="submit" name="login" class="login loginmodal-submit" value="Register">
+			</form>
+
+			<div class="login-help">
+				<a asp-controller="Login" asp-action="ForgotPassWord">Forgot Password</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
