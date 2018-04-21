@@ -46,14 +46,6 @@ namespace PMProjet.Controllers
             return Redirect("Index");
         }
 
-        public IActionResult InvalidPassword()
-        {
-            LoginFormViewModel model = new LoginFormViewModel();
-            model.Message = "Username or password is incorrect !";
-            model.MessageColor = "red";
-            return View("Index", model);
-        }
-
         public IActionResult Connexion(string username, string password)
         {
             if (dal.CheckUser(username, password))
