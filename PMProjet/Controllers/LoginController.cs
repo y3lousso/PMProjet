@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PMProjet.Models;
 using PMProjet.ViewModels;
@@ -17,26 +14,22 @@ namespace PMProjet.Controllers
             dal = new Dal(context);
         }
 
-        public IActionResult Connexion(string username, string password)
+        public IActionResult Index()
         {
-            if (dal.CheckUser(username, password))
-            {
-                return RedirectToAction("Index","AdminController");
-            }
-            else
-            {
-                return RedirectToAction("InvalidPassword");
-            }
+            LoginFormViewModel model = new LoginFormViewModel();
+            model.Message = null;
+            model.MessageColor = null;
+            return View(model);
         }
 
         public IActionResult Register()
         {
-            throw new NotImplementedException();
+            return View();
         }
 
         public IActionResult ForgotPassWord()
         {
-            throw new NotImplementedException();
+            return View();
         }
 
         public IActionResult Deconnexion()
@@ -46,7 +39,33 @@ namespace PMProjet.Controllers
 
         public IActionResult InvalidPassword()
         {
-            return View("InvalidPassword");
+            LoginFormViewModel model = new LoginFormViewModel();
+            model.Message = "Username or password is incorrect !";
+            model.MessageColor = "red";
+            return View("Index", model);
+        }
+
+        public IActionResult Connexion(string username, string password)
+        {
+            if (dal.CheckUser(username, password))
+            {
+                return View("Index");
+            }
+            else
+            {
+                LoginFormViewModel model = new LoginFormViewModel();
+                model.Message = "Username or password is incorrect !";
+                model.MessageColor = "red";
+                return View("Index", model);
+            }
+        }
+
+        public IActionResult ResetPassword()
+        {
+            LoginFormViewModel model = new LoginFormViewModel();
+            model.Message = "A email was send to your mail box ! (TODO)";
+            model.MessageColor = "green";
+            return View("Index", model);
         }
     }
 }

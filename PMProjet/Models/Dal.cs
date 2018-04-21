@@ -45,16 +45,17 @@ namespace PMProjet.Models
 
         public bool CheckUser(string username, string password)
         {
-            Console.WriteLine(db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
-            return true;
-            /*if (db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password) != null)                
+            //Console.WriteLine(db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
+            if (db.Users.SingleOrDefault(u => u.Pseudo == username && u.Password == password) != null)
             {
+                Console.WriteLine("success ! " + db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
                 return true;
             }
             else
             {
+                Console.WriteLine("failed ! " + db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
                 return false;
-            }  */       
+            }  
         }
 
         //Project
