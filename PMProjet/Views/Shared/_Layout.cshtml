@@ -32,24 +32,29 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Template</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a asp-area="" asp-controller="Portfolio" asp-action="Index">Portfolio</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Education" asp-action="Index">Education</a>
-                    </li>
+				<ul class="nav navbar-nav">
 					<li>
-						@if (LoginController.isAthenficated)
-						{
-							<a asp-area="" asp-controller="Login" asp-action="Deconnexion">Deconnexion</a>
-						}
-						else
-						{
-							<a asp-area="" asp-controller="Login" asp-action="Index">Login</a>
-						}
+						<a asp-area="" asp-controller="Portfolio" asp-action="Index">Portfolio</a>
 					</li>
-                </ul>
+					<li>
+						<a asp-area="" asp-controller="Education" asp-action="Index">Education</a>
+					</li>
+					@if (LoginController.isAthenficated)
+					{
+						<li>
+							<a asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+						</li>
+						<li>
+							<a asp-area="" asp-controller="Login" asp-action="Deconnexion">Deconnexion</a>
+						</li>
+					}
+					else
+					{
+						<li>
+							<a asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+						</li>
+					}
+				</ul>
             </div>
         </div>
     </nav>
