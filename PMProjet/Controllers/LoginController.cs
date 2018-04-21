@@ -49,10 +49,17 @@ namespace PMProjet.Controllers
         {
             if (dal.CheckUser(username, password))
             {
-                return View("Index");
+                // Create AdminViewModel
+                AdminViewModel model = new AdminViewModel();
+                model.User = dal.GetUser(username, password);
+                model.Projects = dal.GetAllProjects();
+                model.Educations = dal.GetAllEducations();
+
+                return View("../Admin/Index", model);
             }
             else
             {
+                // Return to login index
                 LoginFormViewModel model = new LoginFormViewModel();
                 model.Message = "Username or password is incorrect !";
                 model.MessageColor = "red";
