@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Text;
+using System.Web;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PMProjet.Models;
 using PMProjet.ViewModels;
@@ -13,9 +16,8 @@ namespace PMProjet.Controllers
         {
             dal = new Dal(context);
         }
-
-        public static bool isAthenficated = false;
-        public static User User = null;
+        
+        public static User CurrentUser = null;
 
         public IActionResult Index()
         {
@@ -45,8 +47,9 @@ namespace PMProjet.Controllers
 
         public IActionResult Deconnexion()
         {
-            LoginController.User = null;
-            LoginController.isAthenficated = false;
+            // Reset session
+            HttpContext.Session.SetString("USER_ID", "");
+            LoginController.CurrentUser = null;
 
             return Redirect("Index");
         }
@@ -69,26 +72,34 @@ namespace PMProjet.Controllers
                 model.Projects = dal.GetAllProjects();
                 model.Educations = dal.GetAllEducations();
 
-                LoginController.User = model.User;
-                LoginController.isAthenficated = true;
+                // Create session
+                LoginController.CurrentUser = model.User;
+                HttpContext.Session.SetString("USER_ID", username);
+                Console.WriteLine("Session : " + HttpContext.Session.GetString(username));
 
+                // Open Admin index
                 return View("../Admin/Index", model);
             }
             else
             {
-                // Return to login index
+                // Set message to wrong password
                 LoginFormViewModel model = new LoginFormViewModel();
                 model.Message = "Username or password is incorrect !";
                 model.MessageColor = "red";
+
+                // Return to login index
                 return View("Index", model);
             }
         }
 
         public IActionResult ResetPassword()
         {
+            // Set message to mail sended
             LoginFormViewModel model = new LoginFormViewModel();
             model.Message = "A email was send to your mail box ! (TODO)";
             model.MessageColor = "green";
+
+            // Return to login index
             return View("Index", model);
         }
     }
