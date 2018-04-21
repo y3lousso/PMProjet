@@ -11,42 +11,30 @@ namespace PMProjet.Models
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new MyDbContext(
-                serviceProvider.GetRequiredService<DbContextOptions<MyDbContext>>()))
+            using (var context = new MyDbContext(serviceProvider.GetRequiredService<DbContextOptions<MyDbContext>>()))
             {
-
                 context.Database.EnsureCreated();
-                // Look for any movies.
-                if (context.Projects.Any() || context.Educations.Any() || context.Users.Any())
+
+                // NEED AT LEAST ONE USER
+                if (!context.Users.Any())
                 {
-                    return;   // DB has been seeded
+                    context.Users.Add(new User { Id = 1, Pseudo = "admin", Password = "admin", FirstName = "FirstName", LastName = "LastName", JobTitle = "JobTitle", Email = "Email" });
+                    context.SaveChanges();
                 }
 
-                var projects = new Project[]
+                // NEED AT LEAST ONE PROJECT
+                if (!context.Projects.Any())
                 {
-        new Project{Name="InvasionVR",Date="Juin 2017",Description="Description1", Thumbnail="background.png"},
-        new Project{Name="Civil Disorder",Date="Juillet 2018 - Mars 2025",Description="Description1", Thumbnail="background.png"},
-                };
-                foreach (Project p in projects)
-                {
-                    context.Projects.Add(p);
+                    context.Projects.Add(new Project { Id = 1, Name = "Project1", Date = "January 2000", Description = "Description1", Thumbnail = "template.png" });
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
 
-                var educations = new Education[]
+                // NEED AT LEAST ONE EDUCATION
+                if (!context.Educations.Any())
                 {
-        new Education{Name="ENIB", Date="2013-2017",Description="EngineeringSchool", Thumbnail="background2.png"},
-        new Education{Name="UQAC",Date="2017-2018",Description="University", Thumbnail="background.png"},
-                };
-                foreach (Education e in educations)
-                {
-                    context.Educations.Add(e);
+                    context.Educations.Add(new Education { Id = 1, Name = "Education1", Date = "January 2000", Description = "Description1", Thumbnail = "template.png" });
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
-
-
-                context.Users.Add(new User {Id = 1, Pseudo = "y3lousso", Password = "password", FirstName = "Yannick", LastName = "Loussouarn", JobTitle = "Student" });
-                context.SaveChanges();
             }
         }
     }

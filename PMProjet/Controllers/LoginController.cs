@@ -19,6 +19,14 @@ namespace PMProjet.Controllers
 
         public IActionResult Index()
         {
+            /*if (dal.CheckUser(username, password))
+            {
+                return RedirectToAction("Index","Admin");
+            }
+            else
+            {
+                return RedirectToAction("InvalidPassword");
+            }*/
             LoginFormViewModel model = new LoginFormViewModel();
             model.Message = null;
             model.MessageColor = null;
@@ -57,7 +65,7 @@ namespace PMProjet.Controllers
             {
                 // Create AdminViewModel
                 AdminViewModel model = new AdminViewModel();
-                model.User = dal.GetUser(username, password);
+                model.User = dal.GetUser();
                 model.Projects = dal.GetAllProjects();
                 model.Educations = dal.GetAllEducations();
 

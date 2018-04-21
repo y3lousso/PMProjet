@@ -1,6 +1,4 @@
-﻿@using PMProjet.Controllers
-@using PMProjet.ViewModels
-
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,48 +33,20 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li>
                         <a asp-area="" asp-controller="Portfolio" asp-action="Index">Portfolio</a>
                     </li>
                     <li>
                         <a asp-area="" asp-controller="Education" asp-action="Index">Education</a>
                     </li>
-	                <li>
-						@if (LoginController.isAthenficated)
-						{
-							<a asp-area="" asp-controller="Login" asp-action="Deconnexion">Deconnexion</a>
-						}
-						else
-						{
-							<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-						}
-	                </li>
-
+                    <li>
+                        <a asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container-fluid body-content">
         @RenderBody()
-    </div>
-
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="loginmodal-container">
-                <h1>Login to Your Account</h1><br>
-                <form asp-area="" asp-controller="Login" asp-action="Connexion">
-                    <input type="text" name="username" placeholder="Username">
-                    <input type="password" name="password" placeholder="Password">
-                    <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-                </form>
-
-	            <div class="login-help">
-		            <a asp-controller="Login" asp-action="ForgotPassWord">Forgot Password</a>
-	            </div>
-            </div>
-        </div>
     </div>
 
     <environment include="Development">

@@ -8,10 +8,10 @@ namespace PMProjet.Models
 {
     public class MyDbContext : DbContext
     {
-
+        public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Education> Educations { get; set; }
-        public DbSet<User> Users { get; set; }
+        
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
@@ -20,9 +20,9 @@ namespace PMProjet.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Project>().ToTable("Project");
-            modelBuilder.Entity<Education>().ToTable("Education");
             modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Project>().ToTable("Project");
+            modelBuilder.Entity<Education>().ToTable("Education");           
         }
     }
 }

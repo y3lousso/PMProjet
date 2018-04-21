@@ -13,41 +13,14 @@ namespace PMProjet.Models
             db = context;
         }
 
-        public int AddUser(string username, string password)
+        public User GetUser()
         {
-            int id = !db.Users.Any() ? 1 : db.Users.Max(u => u.Id) + 1;
-            User user = new User {Id = id, Pseudo = username, Password = password};
-            db.Users.Add(user);
-            return id;
-        }
-
-        public int AddUser(string username, string password, string firstname, string lastname, string jobTitle)
-        {
-            int id = !db.Users.Any() ? 1 : db.Users.Max(u => u.Id) + 1;
-            User user = new User { Id = id, Pseudo = username, Password = password, FirstName = firstname, LastName = lastname, JobTitle = jobTitle};
-            db.Users.Add(user);
-            return id;
-        }
-
-        public User GetUser(int id)
-        {
-            User user = db.Users.FirstOrDefault(u => u.Id == id);
+            User user = db.Users.First();
             return user;
-        }
-
-        public User GetUser(string idString)
-        {
-            return int.TryParse(idString, out var id) ? GetUser(id) : null;
-        }
-
-        public User GetUser(string username, string password)
-        {
-            return db.Users.SingleOrDefault(u => u.Pseudo == username && u.Password == password);
         }
 
         public bool CheckUser(string username, string password)
         {
-            //Console.WriteLine(db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
             if (db.Users.SingleOrDefault(u => u.Pseudo == username && u.Password == password) != null)
             {
                 Console.WriteLine("Login success ! " + db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
