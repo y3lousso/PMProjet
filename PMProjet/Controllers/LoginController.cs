@@ -14,6 +14,9 @@ namespace PMProjet.Controllers
             dal = new Dal(context);
         }
 
+        public static bool isAthenficated = false;
+        public static User User = null;
+
         public IActionResult Index()
         {
             LoginFormViewModel model = new LoginFormViewModel();
@@ -34,7 +37,10 @@ namespace PMProjet.Controllers
 
         public IActionResult Deconnexion()
         {
-            throw new NotImplementedException();
+            LoginController.User = null;
+            LoginController.isAthenficated = false;
+
+            return Redirect("Index");
         }
 
         public IActionResult InvalidPassword()
@@ -54,6 +60,9 @@ namespace PMProjet.Controllers
                 model.User = dal.GetUser(username, password);
                 model.Projects = dal.GetAllProjects();
                 model.Educations = dal.GetAllEducations();
+
+                LoginController.User = model.User;
+                LoginController.isAthenficated = true;
 
                 return View("../Admin/Index", model);
             }
