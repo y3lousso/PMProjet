@@ -18,40 +18,63 @@
 
     @using (Html.BeginForm())
     {
-    <fieldset>
+        <fieldset>
 
-        <legend>Modifier le projet</legend>
+            <legend>Modifier le projet</legend>
 
-        <div>
-            @Html.LabelFor(model => model.Id)
-            @Html.TextBoxFor(model => model.Id)
-            @Html.ValidationMessageFor(model => model.Id)
-        </div>
-        <div>
-            @Html.LabelFor(model => model.Name)
-            @Html.TextBoxFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-        <div>
-            @Html.LabelFor(model => model.Date)
-            @Html.TextBoxFor(model => model.Date)
-            @Html.ValidationMessageFor(model => model.Date)
-        </div>
-        <div>
-            @Html.LabelFor(model => model.Description)
-            @Html.TextBoxFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-        <div>
-            @Html.LabelFor(model => model.Thumbnail)
-            @Html.TextBoxFor(model => model.Thumbnail)
-            @Html.ValidationMessageFor(model => model.Thumbnail)
-        </div>
+            <div>
+                @Html.LabelFor(model => model.Id)
+                @Html.TextBoxFor(model => model.Id)
+                @Html.ValidationMessageFor(model => model.Id)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Date)
+                @Html.TextBoxFor(model => model.Date)
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Description)
+                @Html.TextBoxFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Thumbnail)
+                @Html.TextBoxFor(model => model.Thumbnail)
+                @Html.ValidationMessageFor(model => model.Thumbnail)
+            </div>
 
-        <br />
-        <input type="submit" value="Modifier" />
-    </fieldset>
+            <br />
+            <input type="submit" value="Modifier" />
+        </fieldset>
     }
+
+    <h2>Slides</h2>
+    @Html.ActionLink("Add", "AddSlide", "Admin", new { projectId = Model.Id })
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </tr>
+        @foreach (var slide in Model.Slides)
+        {
+            <tr>
+                <td>@slide.Title</td>
+                <td>@slide.Description</td>
+                <td>@slide.Image</td>
+                <td>@Html.ActionLink("Modify", "ModifySlide", "Admin", new { projectId = Model.Id, slideId = slide.Id })</td>
+                <td>@Html.ActionLink("Delete", "DeleteSlide", "Admin", new { projectId = Model.Id, slideId = slide.Id })</td>
+            </tr>
+        }
+        
+    </table>
 </div>
 
 <footer>

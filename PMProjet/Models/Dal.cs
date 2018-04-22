@@ -61,7 +61,7 @@ namespace PMProjet.Models
 
         public void AddProject(string name, string date, string description, string thumbnail)
         {
-            db.Projects.Add(new Project { Name = name, Date = date, Description = description, Thumbnail = thumbnail });
+            db.Projects.Add(new Project { Name = name, Date = date, Description = description, Thumbnail = thumbnail, Slides = new List<Slide>() });
             db.SaveChanges();
         }
 
@@ -82,6 +82,56 @@ namespace PMProjet.Models
             }
         }
 
+        public void DeleteProject(int id)
+        {
+            db.Projects.Remove(GetProject(id));
+            db.SaveChanges();
+        }
+
+        #endregion
+
+        #region Slide
+
+        public void AddSlide(int projectId, string title, string description, string image)
+        {
+            Project project = GetProject(projectId);
+            if(project.Slides == null)
+            {
+                project.Slides = new List<Slide>();
+            }
+            project.Slides.Add(new Slide {Title = title, Description=description, Image = image });
+            db.SaveChanges();
+        }
+
+        public Slide GetSlide(int projectId, int slideId)
+        {
+            Project project = GetProject(projectId);
+            return project.Slides.FirstOrDefault(p => p.Id == slideId);
+        }
+
+        public void ModifySlide(int projectId, int slideId, string title, string description, string image)
+        {
+            Slide slide = GetSlide(projectId, slideId);
+            if (slide != null)
+            {
+                slide.Title = title;
+                slide.Description = description;
+                slide.Image = image;
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("No slide founded, Id : " + slideId.ToString());
+            }
+        }
+
+        public void DeleteSlide(int projectId, int slideId)
+        {
+            Slide slide = GetSlide(projectId, slideId);
+            GetProject(projectId).Slides.Remove(slide);
+            db.SaveChanges();
+        }
+
         #endregion
 
         #region Education
@@ -96,13 +146,13 @@ namespace PMProjet.Models
             return education;
         }
 
-        public void AddEducation(string name, string date, string description, string thumbnail)
+        public void AddEducation(string name, string date, string description, string thumbnail, string websiteAdress)
         {
-            db.Educations.Add(new Education { Name = name, Date = date, Description = description, Thumbnail = thumbnail });
+            db.Educations.Add(new Education { Name = name, Date = date, Description = description, Thumbnail = thumbnail, WebsiteAdress = websiteAdress });
             db.SaveChanges();
         }
 
-        public void ModifyEducation(int id, string name, string date, string description, string thumbnail)
+        public void ModifyEducation(int id, string name, string date, string description, string thumbnail, string websiteAdress)
         {
             Education education = db.Educations.FirstOrDefault(e => e.Id == id);
             if (education != null)
@@ -111,12 +161,19 @@ namespace PMProjet.Models
                 education.Date = date;
                 education.Description = description;
                 education.Thumbnail = thumbnail;
+                education.WebsiteAdress = websiteAdress;
                 db.SaveChanges();
             }
             else
             {
                 throw new Exception("No education founded, Id : " + id.ToString());
             }
+        }
+
+        public void DeleteEducation(int id)
+        {
+            db.Educations.Remove(GetEducation(id));
+            db.SaveChanges();
         }
 
         #endregion

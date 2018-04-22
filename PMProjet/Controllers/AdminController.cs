@@ -83,6 +83,60 @@ namespace PMProjet.Controllers
             }
         }
 
+        public IActionResult DeleteProject(int projectId)
+        {
+            dal.DeleteProject(projectId);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult AddSlide(int projectId)
+        {
+            SlideProjectViewModel vm = new SlideProjectViewModel();
+            vm.ProjectId = projectId;
+            vm.Slide = new Slide();
+            return View("AddSlide", vm);
+        }
+
+        [HttpPost]
+        public IActionResult AddSlide(SlideProjectViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+            else
+            {
+                dal.AddSlide(vm.ProjectId, vm.Slide.Title, vm.Slide.Description, vm.Slide.Image);
+                return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult ModifySlide(int projectId, int slideId)
+        {
+            Slide slide = dal.GetSlide(projectId, slideId);
+            return View("ModifySlide", slide);
+        }
+
+        [HttpPost]
+        public IActionResult ModifySlide(SlideProjectViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+            else
+            {
+                dal.ModifySlide(vm.ProjectId, vm.Slide.Id, vm.Slide.Title, vm.Slide.Description, vm.Slide.Image);
+                return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult DeleteSlide(int projectId, int slideId)
+        {
+            dal.DeleteSlide(projectId, slideId);
+            return RedirectToAction("Index");
+        }
+
 
         #endregion
 
@@ -102,7 +156,7 @@ namespace PMProjet.Controllers
             }
             else
             {
-                dal.AddEducation(education.Name, education.Date, education.Description, education.Thumbnail);
+                dal.AddEducation(education.Name, education.Date, education.Description, education.Thumbnail, education.WebsiteAdress);
                 return RedirectToAction("Index");
             }
         }
@@ -122,10 +176,16 @@ namespace PMProjet.Controllers
             }
             else
             {
-                dal.ModifyEducation(education.Id, education.Name, education.Date, education.Description, education.Thumbnail);
+                dal.ModifyEducation(education.Id, education.Name, education.Date, education.Description, education.Thumbnail, education.WebsiteAdress);
                 return RedirectToAction("Index");
             }
         }
+        public IActionResult DeleteEducation(int educationId)
+        {
+            dal.DeleteEducation(educationId);
+            return RedirectToAction("Index");
+        }
+
         #endregion
 
 

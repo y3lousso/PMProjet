@@ -60,6 +60,7 @@
     <hr />
 
     <h2>Projects</h2>
+    @Html.ActionLink("Add", "AddProject", "Admin")
     <table>
         <tr>
             <th>Name</th>
@@ -67,22 +68,25 @@
             <th>Description</th>
             <th>Thumbnail</th>
             <th>Modify</th>
+            <th>Delete</th>
         </tr>
         @foreach (var project in Model.Projects)
         {
-            <tr>
-                <td>@project.Name</td>
-                <td>@project.Date</td>
-                <td>@project.Description</td>
-                <td>@project.Thumbnail</td>
-                <td>@Html.ActionLink("Modify", "ModifyProject", "Admin", new{projectId = project.Id})</td>
-            </tr>
+        <tr>
+            <td>@project.Name</td>
+            <td>@project.Date</td>
+            <td>@project.Description</td>
+            <td>@project.Thumbnail</td>
+            <td>@Html.ActionLink("Modify", "ModifyProject", "Admin", new { projectId = project.Id })</td>
+            <td>@Html.ActionLink("Delete", "DeleteProject", "Admin", new { projectId = project.Id })</td>
+        </tr>
         }
     </table>
 
     <hr />
 
     <h2>Educations</h2>
+    @Html.ActionLink("Add", "AddEducation", "Admin")
     <table>
         <tr>
             <th>Name</th>
@@ -90,16 +94,18 @@
             <th>Description</th>
             <th>Thumbnail</th>
             <th>Modify</th>
+            <th>Delete</th>
         </tr>
         @foreach (var education in Model.Educations)
         {
-            <tr>
-                <td>@education.Name</td>
-                <td>@education.Date</td>
-                <td>@education.Description</td>
-                <td>@education.Thumbnail</td>
-                <td>@Html.ActionLink("Modify", "ModifyEducation", "Admin", new { educationId = education.Id })</td>
-            </tr>
+        <tr>
+            <td>@education.Name</td>
+            <td>@education.Date</td>
+            <td>@education.Description</td>
+            <td>@education.Thumbnail</td>
+            <td>@Html.ActionLink("Modify", "ModifyEducation", "Admin", new { educationId = education.Id })</td>
+            <td>@Html.ActionLink("Delete", "DeleteEducation", "Admin", new { educationId = education.Id })</td>
+        </tr>
         }
     </table>
 

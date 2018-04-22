@@ -11,9 +11,10 @@ using System;
 namespace PMProjet.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180422192312_Reset")]
+    partial class Reset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +33,6 @@ namespace PMProjet.Migrations
                     b.Property<string>("Name");
 
                     b.Property<string>("Thumbnail");
-
-                    b.Property<string>("WebsiteAdress");
 
                     b.HasKey("Id");
 
@@ -69,7 +68,7 @@ namespace PMProjet.Migrations
 
                     b.Property<int?>("ProjectId");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Titre");
 
                     b.HasKey("Id");
 

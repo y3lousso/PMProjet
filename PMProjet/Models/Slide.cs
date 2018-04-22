@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 
 namespace PMProjet.Models
 {
-    public class Project
+    public class Slide
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Date { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
-        public string Thumbnail { get; set; }
-        public virtual List<Slide> Slides { get; set; }
+        public string Image { get; set; }
     }
 }

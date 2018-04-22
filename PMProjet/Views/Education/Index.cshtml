@@ -18,7 +18,7 @@
     {
         <div class="row">
             <div class="col-md-7">
-                <a href="#">
+                <a href="@education.WebsiteAdress">
                     @{
                         var imagePath = Url.Content("~/images/" + education.Thumbnail);
                     }
@@ -29,7 +29,7 @@
                 <h3>@education.Name</h3>
                 <h4>@education.Date</h4>
                 <p>@education.Description</p>
-                <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="@education.WebsiteAdress">View education <span class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
         </div>
         <hr>

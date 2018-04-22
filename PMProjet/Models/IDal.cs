@@ -15,13 +15,19 @@ namespace PMProjet.Models
         Project GetProject(int id);
         void AddProject(string name, string date, string description, string thumbnail);
         void ModifyProject(int id, string name, string date, string description, string thumbnail);
+        void DeleteProject(int id);
 
+        void AddSlide(int projectId, string title, string description, string image);
+        Slide GetSlide(int projectId, int id);
+        void ModifySlide(int projectId, int id, string title, string description, string image);
+        void DeleteSlide(int projectId, int id);
 
         //Education
         List<Education> GetAllEducations();
         Education GetEducation(int id);
-        void AddEducation(string name, string date, string description, string thumbnail);
-        void ModifyEducation(int id, string name, string date, string description, string thumbnail);
+        void AddEducation(string name, string date, string description, string thumbnail, string websiteAdress);
+        void ModifyEducation(int id, string name, string date, string description, string thumbnail, string websiteAdress);
+        void DeleteEducation(int id);
 
     }
 }

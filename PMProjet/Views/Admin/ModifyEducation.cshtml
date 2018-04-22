@@ -26,7 +26,6 @@
             @Html.TextBoxFor(model => model.Id)
             @Html.ValidationMessageFor(model => model.Id)
         </div>
-
         <div>
             @Html.LabelFor(model => model.Name)
             @Html.TextBoxFor(model => model.Name)
@@ -47,8 +46,11 @@
             @Html.TextBoxFor(model => model.Thumbnail)
             @Html.ValidationMessageFor(model => model.Thumbnail)
         </div>
-
-        <br />
+        <div>
+            @Html.LabelFor(model => model.WebsiteAdress)
+            @Html.TextBoxFor(model => model.WebsiteAdress)
+            @Html.ValidationMessageFor(model => model.WebsiteAdress)
+        </div>
         <input type="submit" value="Modifier" />
     </fieldset>
     }

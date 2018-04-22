@@ -4,17 +4,12 @@ using System.Collections.Generic;
 
 namespace PMProjet.Migrations
 {
-    public partial class AddThumbnail : Migration
+    public partial class eduAdress : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Thumbnail",
-                table: "Project",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Thumbnail",
+                name: "WebsiteAdress",
                 table: "Education",
                 nullable: true);
         }
@@ -22,11 +17,7 @@ namespace PMProjet.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Thumbnail",
-                table: "Project");
-
-            migrationBuilder.DropColumn(
-                name: "Thumbnail",
+                name: "WebsiteAdress",
                 table: "Education");
         }
     }

@@ -22,14 +22,14 @@
         @foreach (var project in Model)
         {
             <div class="col-md-4 portfolio-item">
-                <a href="#">
+                <a href="@Url.Action("Slideshow", "Portfolio", new { projectId = project.Id})">
                     @{
                         var imagePath = Url.Content("~/images/" + project.Thumbnail);
                     }
                     <img class="img-responsive" src="@imagePath" alt="@imagePath">
                 </a>
                 <h3>
-                    <a href="#"><b>@project.Name</b> @project.Date </a>
+                    <a href="@Url.Action("Slideshow", "Portfolio", new { projectId = project.Id})"><b>@project.Name</b> @project.Date </a>
                 </h3>
                 <p>@project.Description</p>
             </div>

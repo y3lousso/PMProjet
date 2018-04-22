@@ -19,8 +19,14 @@ namespace PMProjet.Controllers
 
         public IActionResult Index()
         {
-            List<Project> listeDesRestaurants = dal.GetAllProjects();
-            return View(listeDesRestaurants);
+            List<Project> projects = dal.GetAllProjects();
+            return View(projects);
+        }
+
+        public IActionResult Slideshow(int projectId)
+        {
+            Project project = dal.GetProject(projectId);
+            return View("Slideshow", project);
         }
 
         public IActionResult Error()
