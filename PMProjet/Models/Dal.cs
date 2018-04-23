@@ -78,14 +78,6 @@ namespace PMProjet.Models
             };
             db.Projects.Add(project);
             db.SaveChanges();
-
-          /*  if (project.Slides == null)
-            {
-                project.Slides = new List<Slide>();
-                Slide templateSlide = new Slide { Title = "Title", Description = "Description", Image = "template.png" };
-                project.Slides.Add(templateSlide);
-                db.SaveChanges();
-            }*/
         }
 
         public void ModifyProject(int id, string name, string date, string description, string thumbnail)
@@ -108,10 +100,7 @@ namespace PMProjet.Models
         public void DeleteProject(int id)
         {
             Project project = GetProject(id);
-            /*if (project.Slides != null)
-            {
-                project.Slides.Clear();
-            }*/
+            db.Slides.RemoveRange(GetSlidesFor(id));
             db.Projects.Remove(project);
             db.SaveChanges();
         }

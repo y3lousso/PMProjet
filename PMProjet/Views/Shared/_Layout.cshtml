@@ -16,16 +16,17 @@
 	<title>@ViewData["Title"] - Template</title>
 
 
-	<environment include="Development">
-		<link rel="stylesheet" href="~/css/site.css" />
-		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-sandstone.css" />
-		<link rel="stylesheet" href="~/css/login.css" />
-	</environment>
-	<environment exclude="Development">
-		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-sandstone.min.css" asp-append-version="true" />
-		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-		<link rel="stylesheet" href="~/css/login.min.css" asp-append-version="true" />
-	</environment>
+    <environment include="Development">
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-sandstone.css" />
+        <link rel="stylesheet" href="~/css/login.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-sandstone.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/login.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">

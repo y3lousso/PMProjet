@@ -4,27 +4,6 @@
 
 @model PMProjet.ViewModels.SlideProjectViewModel
 
-<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f2f2f2
-    }
-
-    th {
-        background-color: #4CAF50;
-        color: white;
-    }
-</style>
-
 <!-- Page Content -->
 <div class="container">
     <!-- Page Heading -->
@@ -39,39 +18,61 @@
 
     @using (Html.BeginForm())
     {
-        <fieldset>
+    <fieldset>
 
-            <legend>Modifier le projet</legend>
+        <legend>Modifier le projet</legend>
 
-            <div>
-                @Html.LabelFor(model => model.Project.Id)
-                @Html.TextBoxFor(model => model.Project.Id)
-                @Html.ValidationMessageFor(model => model.Project.Id)
-            </div>
-            <div>
-                @Html.LabelFor(model => model.Project.Name)
-                @Html.TextBoxFor(model => model.Project.Name)
-                @Html.ValidationMessageFor(model => model.Project.Name)
-            </div>
-            <div>
-                @Html.LabelFor(model => model.Project.Date)
-                @Html.TextBoxFor(model => model.Project.Date)
-                @Html.ValidationMessageFor(model => model.Project.Date)
-            </div>
-            <div>
-                @Html.LabelFor(model => model.Project.Description)
-                @Html.TextBoxFor(model => model.Project.Description)
-                @Html.ValidationMessageFor(model => model.Project.Description)
-            </div>
-            <div>
-                @Html.LabelFor(model => model.Project.Thumbnail)
-                @Html.TextBoxFor(model => model.Project.Thumbnail)
-                @Html.ValidationMessageFor(model => model.Project.Thumbnail)
-            </div>
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Project.Id)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Project.Id)
+                    @Html.ValidationMessageFor(model => model.Project.Id)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Project.Name)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Project.Name)
+                    @Html.ValidationMessageFor(model => model.Project.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Project.Date)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Project.Date)
+                    @Html.ValidationMessageFor(model => model.Project.Date)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Project.Description)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Project.Description)
+                    @Html.ValidationMessageFor(model => model.Project.Description)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Project.Thumbnail)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Project.Thumbnail)
+                    @Html.ValidationMessageFor(model => model.Project.Thumbnail)
+                </td>
+            </tr>
+        </table>
 
-            <br />
-            <input type="submit" value="Modifier" />
-        </fieldset>
+        <br />
+        <input type="submit" value="Modifier" />
+    </fieldset>
     }
 
     <h2>Slides</h2>
