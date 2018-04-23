@@ -2,7 +2,28 @@
     ViewData["Title"] = "Admin";
 }
 
-@model PMProjet.Models.Project
+@model PMProjet.ViewModels.SlideProjectViewModel
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
 
 <!-- Page Content -->
 <div class="container">
@@ -23,29 +44,29 @@
             <legend>Modifier le projet</legend>
 
             <div>
-                @Html.LabelFor(model => model.Id)
-                @Html.TextBoxFor(model => model.Id)
-                @Html.ValidationMessageFor(model => model.Id)
+                @Html.LabelFor(model => model.Project.Id)
+                @Html.TextBoxFor(model => model.Project.Id)
+                @Html.ValidationMessageFor(model => model.Project.Id)
             </div>
             <div>
-                @Html.LabelFor(model => model.Name)
-                @Html.TextBoxFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
+                @Html.LabelFor(model => model.Project.Name)
+                @Html.TextBoxFor(model => model.Project.Name)
+                @Html.ValidationMessageFor(model => model.Project.Name)
             </div>
             <div>
-                @Html.LabelFor(model => model.Date)
-                @Html.TextBoxFor(model => model.Date)
-                @Html.ValidationMessageFor(model => model.Date)
+                @Html.LabelFor(model => model.Project.Date)
+                @Html.TextBoxFor(model => model.Project.Date)
+                @Html.ValidationMessageFor(model => model.Project.Date)
             </div>
             <div>
-                @Html.LabelFor(model => model.Description)
-                @Html.TextBoxFor(model => model.Description)
-                @Html.ValidationMessageFor(model => model.Description)
+                @Html.LabelFor(model => model.Project.Description)
+                @Html.TextBoxFor(model => model.Project.Description)
+                @Html.ValidationMessageFor(model => model.Project.Description)
             </div>
             <div>
-                @Html.LabelFor(model => model.Thumbnail)
-                @Html.TextBoxFor(model => model.Thumbnail)
-                @Html.ValidationMessageFor(model => model.Thumbnail)
+                @Html.LabelFor(model => model.Project.Thumbnail)
+                @Html.TextBoxFor(model => model.Project.Thumbnail)
+                @Html.ValidationMessageFor(model => model.Project.Thumbnail)
             </div>
 
             <br />
@@ -54,7 +75,8 @@
     }
 
     <h2>Slides</h2>
-    @Html.ActionLink("Add", "AddSlide", "Admin", new { projectId = Model.Id })
+    @Html.ActionLink("Add", "AddSlide", "Admin", new { projectId = Model.Project.Id })
+
     <table>
         <tr>
             <th>Titre</th>
@@ -69,11 +91,10 @@
                 <td>@slide.Title</td>
                 <td>@slide.Description</td>
                 <td>@slide.Image</td>
-                <td>@Html.ActionLink("Modify", "ModifySlide", "Admin", new { projectId = Model.Id, slideId = slide.Id })</td>
-                <td>@Html.ActionLink("Delete", "DeleteSlide", "Admin", new { projectId = Model.Id, slideId = slide.Id })</td>
+                <td>@Html.ActionLink("Modify", "ModifySlide", "Admin", new { slideId = slide.Id })</td>
+                <td>@Html.ActionLink("Delete", "DeleteSlide", "Admin", new { slideId = slide.Id })</td>
             </tr>
-        }
-        
+        }       
     </table>
 </div>
 

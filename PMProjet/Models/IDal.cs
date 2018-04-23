@@ -10,20 +10,21 @@ namespace PMProjet.Models
         void ModifyUser(string pseudo, string password, string firstName, string lastName, string jobTitle, string email);
         bool CheckUser(string username, string password);
 
-        // Project
+        //Project
         List<Project> GetAllProjects();
         Project GetProject(int id);
         void AddProject(string name, string date, string description, string thumbnail);
         void ModifyProject(int id, string name, string date, string description, string thumbnail);
         void DeleteProject(int id);
-        
-        // Slide
-        void AddSlide(int projectId, string title, string description, string image);
-        Slide GetSlide(int projectId, int id);
-        void ModifySlide(int projectId, int id, string title, string description, string image);
-        void DeleteSlide(int projectId, int id);
 
-        // Education
+        //Slide
+        void AddSlide(int projectId, string title, string description, string image);
+        Slide GetSlide(int slideId);
+        List<Slide> GetSlidesFor(int projectId);
+        void ModifySlide(int slideId, string title, string description, string image);
+        void DeleteSlide(int slideId);
+
+        //Education
         List<Education> GetAllEducations();
         Education GetEducation(int id);
         void AddEducation(string name, string date, string description, string thumbnail, string websiteAdress);

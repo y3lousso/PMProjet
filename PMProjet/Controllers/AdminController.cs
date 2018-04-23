@@ -65,20 +65,22 @@ namespace PMProjet.Controllers
 
         public IActionResult ModifyProject(int projectId)
         {
-            Project project = dal.GetProject(projectId);
-            return View("ModifyProject", project);
+            SlideProjectViewModel vm = new SlideProjectViewModel();
+            vm.Project= dal.GetProject(projectId);
+            vm.Slides = dal.GetSlidesFor(projectId);
+            return View("ModifyProject", vm);
         }
 
         [HttpPost]
-        public IActionResult ModifyProject(Project project)
+        public IActionResult ModifyProject(SlideProjectViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View(project);
+                return View(vm);
             }
             else
             {
-                dal.ModifyProject(project.Id, project.Name, project.Date, project.Description, project.Thumbnail);
+                dal.ModifyProject(vm.Project.Id, vm.Project.Name, vm.Project.Date, vm.Project.Description, vm.Project.Thumbnail);
                 return RedirectToAction("Index");
             }
         }
@@ -91,49 +93,48 @@ namespace PMProjet.Controllers
 
         public IActionResult AddSlide(int projectId)
         {
-            SlideProjectViewModel vm = new SlideProjectViewModel();
-            vm.ProjectId = projectId;
-            vm.Slide = new Slide();
-            return View("AddSlide", vm);
+            Slide slide = new Slide();
+            slide.ProjectId = projectId;
+            return View("AddSlide", slide);
         }
 
         [HttpPost]
-        public IActionResult AddSlide(SlideProjectViewModel vm)
+        public IActionResult AddSlide(Slide slide)
         {
             if (!ModelState.IsValid)
             {
-                return View(vm);
+                return View(slide);
             }
             else
             {
-                dal.AddSlide(vm.ProjectId, vm.Slide.Title, vm.Slide.Description, vm.Slide.Image);
+                dal.AddSlide(slide.ProjectId, slide.Title, slide.Description, slide.Image);
                 return RedirectToAction("Index");
             }
         }
 
-        public IActionResult ModifySlide(int projectId, int slideId)
+        public IActionResult ModifySlide(int slideId)
         {
-            Slide slide = dal.GetSlide(projectId, slideId);
+            Slide slide = dal.GetSlide(slideId);
             return View("ModifySlide", slide);
         }
 
         [HttpPost]
-        public IActionResult ModifySlide(SlideProjectViewModel vm)
+        public IActionResult ModifySlide(Slide slide)
         {
             if (!ModelState.IsValid)
             {
-                return View(vm);
+                return View(slide);
             }
             else
             {
-                dal.ModifySlide(vm.ProjectId, vm.Slide.Id, vm.Slide.Title, vm.Slide.Description, vm.Slide.Image);
+                dal.ModifySlide(slide.Id, slide.Title, slide.Description, slide.Image);
                 return RedirectToAction("Index");
             }
         }
 
-        public IActionResult DeleteSlide(int projectId, int slideId)
+        public IActionResult DeleteSlide(int slideId)
         {
-            dal.DeleteSlide(projectId, slideId);
+            dal.DeleteSlide(slideId);
             return RedirectToAction("Index");
         }
 

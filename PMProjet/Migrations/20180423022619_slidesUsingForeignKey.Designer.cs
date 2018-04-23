@@ -11,8 +11,8 @@ using System;
 namespace PMProjet.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20180422193432_eduAdress")]
-    partial class eduAdress
+    [Migration("20180423022619_slidesUsingForeignKey")]
+    partial class slidesUsingForeignKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,13 +68,11 @@ namespace PMProjet.Migrations
 
                     b.Property<string>("Image");
 
-                    b.Property<int?>("ProjectId");
+                    b.Property<int>("ProjectId");
 
-                    b.Property<string>("Titre");
+                    b.Property<string>("Title");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("Slide");
                 });
@@ -106,13 +104,6 @@ namespace PMProjet.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("PMProjet.Models.Slide", b =>
-                {
-                    b.HasOne("PMProjet.Models.Project")
-                        .WithMany("Slides")
-                        .HasForeignKey("ProjectId");
                 });
 #pragma warning restore 612, 618
         }
