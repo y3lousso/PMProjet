@@ -18,32 +18,61 @@
 
     @using (Html.BeginForm())
     {
+
     <fieldset>
 
         <legend>Ajouter une education</legend>
 
-        <div>
-            @Html.LabelFor(model => model.Name)
-            @Html.TextBoxFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-        <div>
-            @Html.LabelFor(model => model.Date)
-            @Html.TextBoxFor(model => model.Date)
-            @Html.ValidationMessageFor(model => model.Date)
-        </div>
-        <div>
-            @Html.LabelFor(model => model.Description)
-            @Html.TextBoxFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-        <div>
-            @Html.LabelFor(model => model.Thumbnail)
-            @Html.TextBoxFor(model => model.Thumbnail)
-            @Html.ValidationMessageFor(model => model.Thumbnail)
-        </div>
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Name)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Date)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Date)
+                    @Html.ValidationMessageFor(model => model.Date)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Description)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Thumbnail)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.Thumbnail)
+                    @Html.ValidationMessageFor(model => model.Thumbnail)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.WebsiteAdress)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.WebsiteAdress)
+                    @Html.ValidationMessageFor(model => model.WebsiteAdress)
+                </td>
+            </tr>
+        </table>
 
         <br />
+
         <input type="submit" value="Ajouter" />
     </fieldset>
     }
