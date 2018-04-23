@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PMProjet.Models;

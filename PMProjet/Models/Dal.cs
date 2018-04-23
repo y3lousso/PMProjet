@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace PMProjet.Models
 {
     public class Dal : IDal
     {
         private MyDbContext db;
+
+        // Security
+        private string EncryptionKey = "MAKV2SPBNI99212";
+        private byte[] Salt = {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76};
 
         public Dal(MyDbContext context)
         {
@@ -24,7 +31,7 @@ namespace PMProjet.Models
         {
             User user = db.Users.First();
             user.Pseudo = pseudo;
-            user.Password = password;
+            user.Password = Encrypt(password);
             user.FirstName = firstName;
             user.LastName = lastName;
             user.JobTitle = jobTitle;
@@ -34,7 +41,7 @@ namespace PMProjet.Models
 
         public bool CheckUser(string username, string password)
         {
-            if (db.Users.SingleOrDefault(u => u.Pseudo == username && u.Password == password) != null)
+            if (db.Users.SingleOrDefault(u => u.Pseudo == username && u.Password == Encrypt(password)) != null)
             {
                 Console.WriteLine("Login success ! " + db.Users.FirstOrDefault(u => u.Pseudo == username && u.Password == password));
                 return true;
@@ -182,5 +189,36 @@ namespace PMProjet.Models
         {
             db.Dispose();
         }
+
+        // encrypt a password
+        private string Encrypt(string clearText)
+        {
+
+            // Security
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] Salt = {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76};
+
+
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, Salt);
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+
+            return clearText;
+        }
+
     }
 }
