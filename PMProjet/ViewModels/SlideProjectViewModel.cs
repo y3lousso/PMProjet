@@ -8,7 +8,7 @@ namespace PMProjet.ViewModels
 {
     public class SlideProjectViewModel
     {
-        public int ProjectId { get; set; }
-        public Slide Slide { get; set; }
+        public Project Project { get; set; }
+        public List<Slide> Slides { get; set; }
     }
 }

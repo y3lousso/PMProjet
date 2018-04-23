@@ -17,10 +17,12 @@ namespace PMProjet.Models
         void ModifyProject(int id, string name, string date, string description, string thumbnail);
         void DeleteProject(int id);
 
+        //Slide
         void AddSlide(int projectId, string title, string description, string image);
-        Slide GetSlide(int projectId, int id);
-        void ModifySlide(int projectId, int id, string title, string description, string image);
-        void DeleteSlide(int projectId, int id);
+        Slide GetSlide(int slideId);
+        List<Slide> GetSlidesFor(int projectId);
+        void ModifySlide(int slideId, string title, string description, string image);
+        void DeleteSlide(int slideId);
 
         //Education
         List<Education> GetAllEducations();

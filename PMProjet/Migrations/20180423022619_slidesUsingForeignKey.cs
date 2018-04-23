@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PMProjet.Migrations
 {
-    public partial class Reset : Migration
+    public partial class slidesUsingForeignKey : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,8 @@ namespace PMProjet.Migrations
                     Date = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Thumbnail = table.Column<string>(nullable: true)
+                    Thumbnail = table.Column<string>(nullable: true),
+                    WebsiteAdress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,6 +43,22 @@ namespace PMProjet.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Slide",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
+                    ProjectId = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Slide", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -58,33 +75,6 @@ namespace PMProjet.Migrations
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Slide",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(nullable: true),
-                    Image = table.Column<string>(nullable: true),
-                    ProjectId = table.Column<int>(nullable: true),
-                    Titre = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Slide", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Slide_Project_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Project",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Slide_ProjectId",
-                table: "Slide",
-                column: "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -93,13 +83,13 @@ namespace PMProjet.Migrations
                 name: "Education");
 
             migrationBuilder.DropTable(
+                name: "Project");
+
+            migrationBuilder.DropTable(
                 name: "Slide");
 
             migrationBuilder.DropTable(
                 name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Project");
         }
     }
 }

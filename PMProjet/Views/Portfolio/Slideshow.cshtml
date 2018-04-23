@@ -3,7 +3,7 @@
     Layout = null;
 }
 
-@model PMProjet.Models.Project
+@model PMProjet.ViewModels.SlideProjectViewModel
 
 <!DOCTYPE html>
 
@@ -11,7 +11,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width" />
-    <title>@Model.Name</title>
+    <title>@Model.Project.Name</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -100,7 +100,7 @@
 <body>
     <header>
         <a href="javascript: history.go(-1)">Back</a>
-        <a>Project : Civil Disorder</a>
+        <a>@Model.Project.Name</a>
     </header>
     <div style="display: none;">
         <div id="ninja-slider">

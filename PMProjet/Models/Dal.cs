@@ -61,8 +61,23 @@ namespace PMProjet.Models
 
         public void AddProject(string name, string date, string description, string thumbnail)
         {
-            db.Projects.Add(new Project { Name = name, Date = date, Description = description, Thumbnail = thumbnail, Slides = new List<Slide>() });
+            Project project = new Project
+            {
+                Name = name,
+                Date = date,
+                Description = description,
+                Thumbnail = thumbnail,
+            };
+            db.Projects.Add(project);
             db.SaveChanges();
+
+          /*  if (project.Slides == null)
+            {
+                project.Slides = new List<Slide>();
+                Slide templateSlide = new Slide { Title = "Title", Description = "Description", Image = "template.png" };
+                project.Slides.Add(templateSlide);
+                db.SaveChanges();
+            }*/
         }
 
         public void ModifyProject(int id, string name, string date, string description, string thumbnail)
@@ -84,7 +99,12 @@ namespace PMProjet.Models
 
         public void DeleteProject(int id)
         {
-            db.Projects.Remove(GetProject(id));
+            Project project = GetProject(id);
+            /*if (project.Slides != null)
+            {
+                project.Slides.Clear();
+            }*/
+            db.Projects.Remove(project);
             db.SaveChanges();
         }
 
@@ -94,24 +114,31 @@ namespace PMProjet.Models
 
         public void AddSlide(int projectId, string title, string description, string image)
         {
-            Project project = GetProject(projectId);
-            if(project.Slides == null)
-            {
-                project.Slides = new List<Slide>();
-            }
-            project.Slides.Add(new Slide {Title = title, Description=description, Image = image });
+            db.Slides.Add(new Slide {ProjectId = projectId, Title = title, Description = description, Image = image });
             db.SaveChanges();
         }
 
-        public Slide GetSlide(int projectId, int slideId)
+        public Slide GetSlide(int slideId)
         {
-            Project project = GetProject(projectId);
-            return project.Slides.FirstOrDefault(p => p.Id == slideId);
+            return db.Slides.FirstOrDefault(p => p.Id == slideId);
         }
 
-        public void ModifySlide(int projectId, int slideId, string title, string description, string image)
+        public List<Slide> GetSlidesFor(int projectId)
         {
-            Slide slide = GetSlide(projectId, slideId);
+            List<Slide> slides = new List<Slide>();
+            foreach (Slide s in db.Slides)
+            {
+                if(s.ProjectId == projectId)
+                {
+                    slides.Add(s);
+                }
+            }
+            return slides;
+        }
+
+        public void ModifySlide(int slideId, string title, string description, string image)
+        {
+            Slide slide = GetSlide(slideId);
             if (slide != null)
             {
                 slide.Title = title;
@@ -125,10 +152,9 @@ namespace PMProjet.Models
             }
         }
 
-        public void DeleteSlide(int projectId, int slideId)
+        public void DeleteSlide(int slideId)
         {
-            Slide slide = GetSlide(projectId, slideId);
-            GetProject(projectId).Slides.Remove(slide);
+            db.Slides.Remove(GetSlide(slideId));
             db.SaveChanges();
         }
 

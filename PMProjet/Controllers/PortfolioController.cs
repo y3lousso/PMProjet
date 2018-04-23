@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PMProjet.Models;
+using PMProjet.ViewModels;
 
 namespace PMProjet.Controllers
 {
@@ -25,8 +26,10 @@ namespace PMProjet.Controllers
 
         public IActionResult Slideshow(int projectId)
         {
-            Project project = dal.GetProject(projectId);
-            return View("Slideshow", project);
+            SlideProjectViewModel vm = new SlideProjectViewModel();
+            vm.Project = dal.GetProject(projectId);
+            vm.Slides = dal.GetSlidesFor(projectId);
+            return View("Slideshow", vm);
         }
 
         public IActionResult Error()
