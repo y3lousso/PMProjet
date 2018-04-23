@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +17,7 @@ namespace PMProjet.Controllers
     public class LoginController : Controller
     {
         private IDal dal;
+        private Random random = new Random(); // A random for random password generation
 
         public LoginController(MyDbContext context)
         {
@@ -81,12 +86,52 @@ namespace PMProjet.Controllers
             }
         }
 
-        public IActionResult ResetPassword()
+        public IActionResult ResetPassword(string email)
         {
-            // Set message to mail sended
             LoginFormViewModel model = new LoginFormViewModel();
-            model.Message = "A email was send to your mail box ! (TODO)";
-            model.MessageColor = "green";
+            User user = dal.GetUser();
+            if (user.Email == email)
+            {
+                // Create new random password
+                String randomPassword = RandomString(20);
+
+                // Create mail
+                MailMessage mail = new MailMessage("portfolio.template.azure@gmail.com", email);
+                mail.Subject = "Password Recovery";
+                string baseUri = Request.GetUri().GetLeftPart(UriPartial.Authority);
+                mail.Body = string.Format(
+                    "Hi {0},<br /><br />" + 
+                    "Your new password has been reset and is <b>{1}</b>. <br />" +
+                    "You are encouraged to change your new password as soon as possible !<br />" +
+                    "You can login <a href={2}/Login>here</a> with your new password.<br /><br />" +
+                    "Thank You !", user.Pseudo, randomPassword, baseUri);
+                mail.IsBodyHtml = true;
+
+                // Create client
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential("portfolio.template.azure@gmail.com", "PortfolioTemplate1");
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.EnableSsl = true;
+                smtp.Port = 587;
+
+                // Send mail
+                smtp.Send(mail);
+
+                // Reset password
+                dal.ModifyUser(user.Pseudo, randomPassword, user.FirstName, user.LastName, user.JobTitle, user.Email);
+
+                // Set meassage to email sended
+                model.Message = "A email was send to your mail box !";
+                model.MessageColor = "green";
+            }
+            else
+            {
+                // Set message to email incorrect
+                model.Message = "This email is incorrect !";
+                model.MessageColor = "red";
+            };
 
             // Return to login index
             return View("Index", model);
@@ -103,6 +148,7 @@ namespace PMProjet.Controllers
             return View("Index", model);
         }
 
+        // Claim authorization for the current user
         private IEnumerable<Claim> GetUserClaims(User user)
         {
             List<Claim> claims = new List<Claim>();
@@ -111,6 +157,13 @@ namespace PMProjet.Controllers
             claims.Add(new Claim(ClaimTypes.Name, user.Pseudo));
             claims.Add(new Claim(ClaimTypes.Email, user.Email));
             return claims;
+        }
+
+        public string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
