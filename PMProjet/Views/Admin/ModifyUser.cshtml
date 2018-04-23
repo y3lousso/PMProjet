@@ -33,6 +33,15 @@
 				</tr>
 				<tr>
 					<td>
+						@Html.LabelFor(model => model.Email)
+					</td>
+					<td>
+						@Html.TextBoxFor(model => model.Email)
+						@Html.ValidationMessageFor(model => model.Email)
+					</td>
+				</tr>
+				<tr>
+					<td>
 						@Html.LabelFor(model => model.Password)
 					</td>
 					<td>
