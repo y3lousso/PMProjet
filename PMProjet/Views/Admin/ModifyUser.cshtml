@@ -19,33 +19,55 @@
     @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Modifier l'utilisateur</legend>
-
-            <div>
-                @Html.LabelFor(model => model.Pseudo)
-                @Html.TextBoxFor(model => model.Pseudo)
-                @Html.ValidationMessageFor(model => model.Pseudo)
-            </div>
-            <div>
-                @Html.LabelFor(model => model.Password)
-                @Html.TextBoxFor(model => model.Password, Model.Password = "")
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-            <div>
-                @Html.LabelFor(model => model.FirstName)
-                @Html.TextBoxFor(model => model.FirstName)
-                @Html.ValidationMessageFor(model => model.FirstName)
-            </div>
-            <div>
-                @Html.LabelFor(model => model.LastName)
-                @Html.TextBoxFor(model => model.LastName)
-                @Html.ValidationMessageFor(model => model.LastName)
-            </div>
-            <div>
-                @Html.LabelFor(model => model.JobTitle)
-                @Html.TextBoxFor(model => model.JobTitle)
-                @Html.ValidationMessageFor(model => model.JobTitle)
-            </div>
+            <legend>Update your information :</legend>
+			
+			<table>
+				<tr>
+					<td>
+						@Html.LabelFor(model => model.Pseudo)
+					</td>
+					<td>
+						@Html.TextBoxFor(model => model.Pseudo)
+						@Html.ValidationMessageFor(model => model.Pseudo)
+					</td>
+				</tr>
+				<tr>
+					<td>
+						@Html.LabelFor(model => model.Password)
+					</td>
+					<td>
+						@Html.TextBoxFor(model => model.Password)
+						@Html.ValidationMessageFor(model => model.Password)
+					</td>
+				</tr>
+				<tr>
+					<td>
+						@Html.LabelFor(model => model.FirstName)
+					</td>
+					<td>
+						@Html.TextBoxFor(model => model.FirstName)
+						@Html.ValidationMessageFor(model => model.FirstName)
+					</td>
+				</tr>
+				<tr>
+					<td>
+						@Html.LabelFor(model => model.LastName)
+					</td>
+					<td>
+						@Html.TextBoxFor(model => model.LastName)
+						@Html.ValidationMessageFor(model => model.LastName)
+					</td>
+				</tr>
+				<tr>
+					<td>
+						@Html.LabelFor(model => model.JobTitle)
+					</td>
+					<td>
+						@Html.TextBoxFor(model => model.JobTitle)
+						@Html.ValidationMessageFor(model => model.JobTitle)
+					</td>
+				</tr>
+			</table>
 
             <br />
             <input type="submit" value="Modifier" />

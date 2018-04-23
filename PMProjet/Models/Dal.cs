@@ -24,6 +24,7 @@ namespace PMProjet.Models
         public User GetUser()
         {
             User user = db.Users.First();
+            user.Password = Decrypt(user.Password);
             return user;
         }
 
@@ -216,15 +217,9 @@ namespace PMProjet.Models
             db.Dispose();
         }
 
-        // encrypt a password
+        // Encrypt a password
         private string Encrypt(string clearText)
         {
-
-            // Security
-            string EncryptionKey = "MAKV2SPBNI99212";
-            byte[] Salt = {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76};
-
-
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
             {
@@ -244,6 +239,28 @@ namespace PMProjet.Models
             }
 
             return clearText;
+        }
+
+        // Decrypt a password
+        private string Decrypt(string cipherText)
+        {
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, Salt);
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
         }
 
     }
