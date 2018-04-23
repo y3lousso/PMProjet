@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PMProjet.Models;
 using PMProjet.ViewModels;
 
 namespace PMProjet.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IDal dal;
@@ -16,6 +13,7 @@ namespace PMProjet.Controllers
         public AdminController(MyDbContext context)
         {
             dal = new Dal(context);
+
         }
 
         public IActionResult Index()
