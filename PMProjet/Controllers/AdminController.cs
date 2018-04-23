@@ -108,7 +108,7 @@ namespace PMProjet.Controllers
             else
             {
                 dal.AddSlide(slide.ProjectId, slide.Title, slide.Description, slide.Image);
-                return RedirectToAction("Index");
+                return RedirectToAction("ModifyProject", new { projectId = slide.ProjectId });
             }
         }
 
@@ -128,7 +128,7 @@ namespace PMProjet.Controllers
             else
             {
                 dal.ModifySlide(slide.Id, slide.Title, slide.Description, slide.Image);
-                return RedirectToAction("Index");
+                return RedirectToAction("ModifyProject", new { projectId = slide.ProjectId });
             }
         }
 
@@ -137,8 +137,6 @@ namespace PMProjet.Controllers
             dal.DeleteSlide(slideId);
             return RedirectToAction("Index");
         }
-
-
         #endregion
 
         #region Education
