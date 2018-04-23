@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PMProjet.Models;
@@ -41,6 +45,9 @@ namespace PMProjet.Controllers
             HttpContext.Session.SetString("USER_ID", "");
             LoginController.CurrentUser = null;
 
+            //
+            HttpContext.SignOutAsync();
+
             return Redirect("Index");
         }
 
@@ -53,6 +60,11 @@ namespace PMProjet.Controllers
                 LoginController.CurrentUser = dal.GetUser();
                 HttpContext.Session.SetString("USER_ID", username);
                 Console.WriteLine("Session : " + HttpContext.Session.GetString(username));
+
+                // Add Admin authorization
+                ClaimsIdentity identity = new ClaimsIdentity(this.GetUserClaims(LoginController.CurrentUser), CookieAuthenticationDefaults.AuthenticationScheme);
+                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                 // Redirect to Admin index
                 return RedirectToAction("Index", "Admin");
@@ -78,6 +90,27 @@ namespace PMProjet.Controllers
 
             // Return to login index
             return View("Index", model);
+        }
+
+        public IActionResult AccessDenied()
+        {
+            // Set message to access denied
+            LoginFormViewModel model = new LoginFormViewModel();
+            model.Message = "Access denied ! Please login first !";
+            model.MessageColor = "red";
+
+            // Return to login index
+            return View("Index", model);
+        }
+
+        private IEnumerable<Claim> GetUserClaims(User user)
+        {
+            List<Claim> claims = new List<Claim>();
+
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.Name, user.Pseudo));
+            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            return claims;
         }
     }
 }
