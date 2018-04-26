@@ -35,9 +35,35 @@ namespace PMProjet.Controllers
         [HttpPost, ActionName("ModifyUser")]
         public IActionResult ModifyUserPost(User user)
         {
-            dal.ModifyUser(user.Pseudo, user.Password, user.FirstName, user.LastName, user.JobTitle, user.Email);
+            dal.ModifyUserInfo(user.Pseudo, user.FirstName, user.LastName, user.JobTitle, user.Email);
             return RedirectToAction("Index");
         }
+
+        public IActionResult ModifyPassword()
+        {
+            return View("ModifyPassword");
+        }
+
+        [HttpPost, ActionName("ModifyPassword")]
+        public IActionResult ModifyPasswordPost(string currentPassword, string newPassword, string confirmNewPassword)
+        {
+            User user = dal.GetUser();
+            MessageViewModel model = new MessageViewModel();
+            if (newPassword == confirmNewPassword && dal.CheckUser(user.Pseudo, currentPassword))
+            {
+                dal.ModifyUserPassword(newPassword);
+                model.Message = "Your password has been changed !";
+                model.MessageColor = "green";
+            }
+            else
+            {
+                model.Message = "Error !";
+                model.MessageColor = "red";
+            }
+
+            return RedirectToAction("Index");
+        }
+
         #endregion
 
         #region Project
