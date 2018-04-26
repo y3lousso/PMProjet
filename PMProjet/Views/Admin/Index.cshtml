@@ -31,7 +31,7 @@
             <td>@Model.User.LastName</td>
             <td>@Model.User.JobTitle</td>
             <td>@Model.User.Pseudo</td>
-            <td>*****</td>
+            <td>***** (@Html.ActionLink("Change", "ModifyPassword", "Admin"))</td>
             <td>@Html.ActionLink("Modify", "ModifyUser", "Admin")</td>
         </tr>
     </table>
