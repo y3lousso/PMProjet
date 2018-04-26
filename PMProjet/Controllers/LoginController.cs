@@ -28,7 +28,7 @@ namespace PMProjet.Controllers
 
         public IActionResult Index()
         {
-            LoginFormViewModel model = new LoginFormViewModel();
+            MessageViewModel model = new MessageViewModel();
             model.Message = null;
             model.MessageColor = null;
             return View(model);
@@ -77,7 +77,7 @@ namespace PMProjet.Controllers
             else
             {
                 // Set message to wrong password
-                LoginFormViewModel model = new LoginFormViewModel();
+                MessageViewModel model = new MessageViewModel();
                 model.Message = "Username or password is incorrect !";
                 model.MessageColor = "red";
 
@@ -88,7 +88,7 @@ namespace PMProjet.Controllers
 
         public IActionResult ResetPassword(string email)
         {
-            LoginFormViewModel model = new LoginFormViewModel();
+            MessageViewModel model = new MessageViewModel();
             User user = dal.GetUser();
             if (user.Email == email)
             {
@@ -120,7 +120,7 @@ namespace PMProjet.Controllers
                 smtp.Send(mail);
 
                 // Reset password
-                dal.ModifyUser(user.Pseudo, randomPassword, user.FirstName, user.LastName, user.JobTitle, user.Email);
+                dal.ModifyUserPassword(randomPassword);
 
                 // Set meassage to email sended
                 model.Message = "A email was send to your mail box !";
@@ -140,7 +140,7 @@ namespace PMProjet.Controllers
         public IActionResult AccessDenied()
         {
             // Set message to access denied
-            LoginFormViewModel model = new LoginFormViewModel();
+            MessageViewModel model = new MessageViewModel();
             model.Message = "Access denied ! Please login first !";
             model.MessageColor = "red";
 
