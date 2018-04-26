@@ -24,19 +24,24 @@ namespace PMProjet.Models
         public User GetUser()
         {
             User user = db.Users.First();
-            user.Password = Decrypt(user.Password);
             return user;
         }
 
-        public void ModifyUser(string pseudo, string password, string firstName, string lastName, string jobTitle, string email)
+        public void ModifyUserInfo(string pseudo, string firstName, string lastName, string jobTitle, string email)
         {
             User user = db.Users.First();
             user.Pseudo = pseudo;
-            user.Password = Encrypt(password);
             user.FirstName = firstName;
             user.LastName = lastName;
             user.JobTitle = jobTitle;
             user.Email = email;
+            db.SaveChanges();
+        }
+
+        public void ModifyUserPassword(string password)
+        {
+            User user = db.Users.First();
+            user.Password = Encrypt(password);
             db.SaveChanges();
         }
 
@@ -228,28 +233,6 @@ namespace PMProjet.Models
             }
 
             return clearText;
-        }
-
-        // Decrypt a password
-        private string Decrypt(string cipherText)
-        {
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, Salt);
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(cipherBytes, 0, cipherBytes.Length);
-                        cs.Close();
-                    }
-                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
-                }
-            }
-            return cipherText;
         }
 
     }

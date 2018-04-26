@@ -7,7 +7,8 @@ namespace PMProjet.Models
     {
         //Info & Login
         User GetUser();
-        void ModifyUser(string pseudo, string password, string firstName, string lastName, string jobTitle, string email);
+        void ModifyUserInfo(string pseudo, string firstName, string lastName, string jobTitle, string email);
+        void ModifyUserPassword(string password);
         bool CheckUser(string username, string password);
 
         //Project
