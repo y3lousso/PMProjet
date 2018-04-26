@@ -16,12 +16,13 @@ namespace PMProjet.Controllers
 
         }
 
-        public IActionResult Index()
+        public IActionResult Index(MessageViewModel messageViewModel)
         {
             AdminViewModel adminViewModel = new AdminViewModel();
             adminViewModel.User = dal.GetUser();
             adminViewModel.Projects = dal.GetAllProjects();
             adminViewModel.Educations = dal.GetAllEducations();
+            adminViewModel.MessageViewModel = messageViewModel;
             return View(adminViewModel);
         }
 
@@ -36,7 +37,10 @@ namespace PMProjet.Controllers
         public IActionResult ModifyUserPost(User user)
         {
             dal.ModifyUserInfo(user.Pseudo, user.FirstName, user.LastName, user.JobTitle, user.Email);
-            return RedirectToAction("Index");
+            MessageViewModel model = new MessageViewModel();
+            model.Message = "User information edited with success !";
+            model.MessageColor = "green";
+            return RedirectToAction("Index", model);
         }
 
         public IActionResult ModifyPassword()
@@ -57,11 +61,11 @@ namespace PMProjet.Controllers
             }
             else
             {
-                model.Message = "Error !";
+                model.Message = "Can't change your password ! Please check the information typed !";
                 model.MessageColor = "red";
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", model);
         }
 
         #endregion
@@ -83,7 +87,10 @@ namespace PMProjet.Controllers
             else
             {
                 dal.AddProject(project.Name, project.Date, project.Description, project.Thumbnail);
-                return RedirectToAction("Index");
+                MessageViewModel model = new MessageViewModel();
+                model.Message = "Project added with success !";
+                model.MessageColor = "green";
+                return RedirectToAction("Index", model);
             }
         }
 
@@ -105,14 +112,20 @@ namespace PMProjet.Controllers
             else
             {
                 dal.ModifyProject(vm.Project.Id, vm.Project.Name, vm.Project.Date, vm.Project.Description, vm.Project.Thumbnail);
-                return RedirectToAction("Index");
+                MessageViewModel model = new MessageViewModel();
+                model.Message = "Project edited with success !";
+                model.MessageColor = "green";
+                return RedirectToAction("Index", model);
             }
         }
 
         public IActionResult DeleteProject(int projectId)
         {
             dal.DeleteProject(projectId);
-            return RedirectToAction("Index");
+            MessageViewModel model = new MessageViewModel();
+            model.Message = "Project deleted with success !";
+            model.MessageColor = "green";
+            return RedirectToAction("Index", model);
         }
 
         public IActionResult AddSlide(int projectId)
@@ -159,7 +172,10 @@ namespace PMProjet.Controllers
         public IActionResult DeleteSlide(int slideId)
         {
             dal.DeleteSlide(slideId);
-            return RedirectToAction("Index");
+            MessageViewModel model = new MessageViewModel();
+            model.Message = "Slide deleted with success !";
+            model.MessageColor = "green";
+            return RedirectToAction("Index", model);
         }
         #endregion
 
@@ -180,7 +196,10 @@ namespace PMProjet.Controllers
             else
             {
                 dal.AddEducation(education.Name, education.Date, education.Description, education.Thumbnail, education.WebsiteAdress);
-                return RedirectToAction("Index");
+                MessageViewModel model = new MessageViewModel();
+                model.Message = "Education added with success !";
+                model.MessageColor = "green";
+                return RedirectToAction("Index", model);
             }
         }
 
@@ -200,13 +219,19 @@ namespace PMProjet.Controllers
             else
             {
                 dal.ModifyEducation(education.Id, education.Name, education.Date, education.Description, education.Thumbnail, education.WebsiteAdress);
-                return RedirectToAction("Index");
+                MessageViewModel model = new MessageViewModel();
+                model.Message = "Education edited with success !";
+                model.MessageColor = "green";
+                return RedirectToAction("Index", model);
             }
         }
         public IActionResult DeleteEducation(int educationId)
         {
             dal.DeleteEducation(educationId);
-            return RedirectToAction("Index");
+            MessageViewModel model = new MessageViewModel();
+            model.Message = "Education deleted with success !";
+            model.MessageColor = "green";
+            return RedirectToAction("Index", model);
         }
 
         #endregion
