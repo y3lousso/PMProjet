@@ -1,26 +1,43 @@
 # Projet Portfolio
 
 Le projet portfolio a pour but de mettre en avant le profil de chacun lors de la recherche d'emploi.
-Grace ‡ un espace administrateur, l'utilisateur va pouvoir ajouter facilement du contenu.
+Grace √† un espace administrateur, l'utilisateur va pouvoir ajouter facilement du contenu.
 
-# Technologies utilisÈes
+# Auteurs
+  -**LOUSSOUARN Yannick**
+  -**FAGET Thomas**
 
-- HÈbergement : Cloud Azure
-- Stockage des donnÈes : SQL Server Database (Azure)
-- Gestion de la base de donnÈes : Entity Framework (Code first)
-- Framework de dÈveloppement : ASP.NET Core MVC 2.0
+# Technologies utilis√©es
 
-# Comment utiliser le projet.
+- H√©bergement : Cloud Azure
+- Stockage des donn√©es : SQL Server Database (Azure)
+- Gestion de la base de donn√©es : Entity Framework (Code first)
+- Framework de d√©veloppement : ASP.NET Core MVC 2.0
 
-1. Pour essayer : [http://portfoliotemplate.azurewebsites.net/] (http://portfoliotemplate.azurewebsites.net/).
+# Comment utiliser le projet
 
-2. Pour crÈer le votre :
+1. Pour essayer : [http://portfoliotemplate.azurewebsites.net/](http://portfoliotemplate.azurewebsites.net/).
 
-  - TÈlÈcharger le code source via master.
-  - Sous Visual Studio 2017, connecter vous ‡ une base de donnÈes SQL Server. (NÈcessite un compte Azure -> Payant)
+2. Pour cr√©er le votre :
+
+  - T√©l√©charger le code source via master.
+  - Sous Visual Studio 2017, connecter vous √† une base de donn√©es SQL Server. (N√©cessite un compte Azure -> Payant)
   - Changer la "connectionString" dans le fichier" "appsettings.json" par celle disponible sur votre portail Azure.
-  - Configurer la base de donnÈes (Code First), depuis le gestionnaire de package, appliquer les commandes "AddMigration start" puis "Update-Database".
+  - Configurer la base de donn√©es (Code First), depuis le gestionnaire de package, appliquer les commandes "AddMigration start" puis "Update-Database".
   - Publier l'application sur Azure.
 
-Il ne vous reste plus qu'‡ complÈter votre contenu !
+Il ne vous reste plus qu'√† compl√©ter votre contenu !
 
+# Mode d'emploi
+
+## Premi√®re connexion
+
+Lors de votre premi√®re connexion dans l'espace admin, utilisez l'identifiant *admin* et le mot de passe *admin*. Vous devriez remplacer ce mot de passe par le votre.
+
+Pour cela allez dans l'onglet *User* de l'espace admin et clicker sur *Change* √† cot√© de votre mot de passe.
+
+Ensuite modifier vos informations personnelles en clickant sur *modify* dans *User*. Pensez aussi √† verifier votre adresse mail, c'est celle qui est utilis√© pour pouvoir r√©cup√©rer votre mot de passe si vous l'avez perdu !
+
+## Ajouter du contenu
+
+Vous pouvez maintenant ajouter du contenu dans la section *Projets* ou *Education*, en clickant sur *Add*.
