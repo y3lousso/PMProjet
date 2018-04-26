@@ -32,16 +32,14 @@ Il ne vous reste plus qu'à compléter votre contenu !
 
 ## Première connexion
 
-Lors de votre première connexion dans l'espace admin, utilisez l'identifiant *admin* et le mot de passe *admin*. Vous devriez remplacer ce mot de passe par le votre.
+Lors de votre première connexion dans l'espace admin, utilisez l'identifiant *admin* et le mot de passe *admin*. Par la suite vous devrez remplacer ce mot de passe par le votre. Pour cela, une fois connecté, allez dans l'onglet *User* de l'espace admin et cliquez sur *Change* à coté de votre mot de passe pour pouvoir le changer.
 
-Pour cela allez dans l'onglet *User* de l'espace admin et cliquer sur *Change* à coté de votre mot de passe.
-
-Ensuite modifier vos informations personnelles en clickant sur *modify* dans *User*. Pensez aussi à verifier votre adresse mail, c'est celle qui est utilisé pour pouvoir récupérer votre mot de passe si vous l'avez perdu !
+Ensuite modifier vos informations personnelles en cliquant sur *Modify* dans *User*. Pensez aussi à verifier que votre adresse mail est correct, car c'est elle qui est utilisé pour pouvoir récupérer votre mot de passe si vous l'avez perdu !
 
 ## Ajouter du contenu
 
 Vous pouvez maintenant ajouter du contenu dans la section *Projets* ou *Education*, en cliquant sur *Add*.
-Pour modifier un Projet ou une Education, cliquez sur *Modify* en face de l'item à modifier.
+Pour modifier un Projet ou une Education, cliquez sur *modify* en face de l'item à modifier.
 Enfin cliquez sur *delete* pour effacer un Projet ou une Education.
 
 Vous pouvez aussi ajouter des images à chaque Projet, avec un nom et une description. Pour cela choisissez un projet (avec *Modify*) et aller dans l'onglet *Slide*.
