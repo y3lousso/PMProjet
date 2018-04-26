@@ -15,7 +15,13 @@ Framework de développement : ASP.NET Core MVC 2.0
 
 Pour essayer : [http://portfoliotemplate.azurewebsites.net/] (http://portfoliotemplate.azurewebsites.net/).
 
+Pour créer le votre :
 
 Télécharger le code source via master.
-Sous Visual Studio 2017, connecter vous à une base de données SQL Server. (Azure -> Payant)
-Changer la "connectionString"
+Sous Visual Studio 2017, connecter vous à une base de données SQL Server. (Nécessite un compte Azure -> Payant)
+Changer la "connectionString" dans le fichier" "appsettings.json" par celle disponible sur votre portail Azure.
+Configurer la base de données (Code First), depuis le gestionnaire de package, appliquer les commandes "AddMigration start" puis "Update-Database".
+Publier l'application sur Azure.
+
+Il ne vous reste plus qu'à compléter votre contenu !
+
