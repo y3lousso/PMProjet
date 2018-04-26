@@ -4,8 +4,8 @@ Le projet portfolio a pour but de mettre en avant le profil de chacun lors de la
 Grace à un espace administrateur, l'utilisateur va pouvoir ajouter facilement du contenu.
 
 # Auteurs
-  -**LOUSSOUARN Yannick**
-  -**FAGET Thomas**
+  - **LOUSSOUARN Yannick**
+  - **FAGET Thomas**
 
 # Technologies utilisées
 
@@ -16,7 +16,7 @@ Grace à un espace administrateur, l'utilisateur va pouvoir ajouter facilement d
 
 # Comment utiliser le projet
 
-1. Pour essayer : [http://portfoliotemplate.azurewebsites.net/](http://portfoliotemplate.azurewebsites.net/).
+1. Pour essayer cliquer [ici](http://portfoliotemplate.azurewebsites.net/).
 
 2. Pour créer le votre :
 
@@ -34,10 +34,16 @@ Il ne vous reste plus qu'à compléter votre contenu !
 
 Lors de votre première connexion dans l'espace admin, utilisez l'identifiant *admin* et le mot de passe *admin*. Vous devriez remplacer ce mot de passe par le votre.
 
-Pour cela allez dans l'onglet *User* de l'espace admin et clicker sur *Change* à coté de votre mot de passe.
+Pour cela allez dans l'onglet *User* de l'espace admin et cliquer sur *Change* à coté de votre mot de passe.
 
 Ensuite modifier vos informations personnelles en clickant sur *modify* dans *User*. Pensez aussi à verifier votre adresse mail, c'est celle qui est utilisé pour pouvoir récupérer votre mot de passe si vous l'avez perdu !
 
 ## Ajouter du contenu
 
-Vous pouvez maintenant ajouter du contenu dans la section *Projets* ou *Education*, en clickant sur *Add*.
+Vous pouvez maintenant ajouter du contenu dans la section *Projets* ou *Education*, en cliquant sur *Add*.
+Pour modifier un Projet ou une Education, cliquez sur *Modify* en face de l'item à modifier.
+Enfin cliquez sur *delete* pour effacer un Projet ou une Education.
+
+Vous pouvez aussi ajouter des images à chaque Projet, avec un nom et une description. Pour cela choisissez un projet (avec *Modify*) et aller dans l'onglet *Slide*.
+Vous pouvez alors ajouter, modifier, ou supprimer une slide pour ce projet, comme précedemment.
+
